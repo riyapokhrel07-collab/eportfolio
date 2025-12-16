@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDG 15 Data Visualization Platform - Riya Pokhrel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2d5985;
+            --accent: #d4af37;
+            --text-dark: #1a202c;
+            --text-light: #4a5568;
+            --bg-light: #f7fafc;
+            --bg-white: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text-dark);
+            background: var(--bg-white);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 3rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .project-header {
+            margin-bottom: 3rem;
+        }
+
+        .project-category {
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+        .project-links {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .project-link {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            transition: color var(--transition-base);
+        }
+
+        .project-link:hover {
+            color: var(--accent);
+        }
+
+        h1 {
+            font-family: 'Fraunces', serif;
+            font-size: 3rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .project-meta {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .tag {
+            padding: 0.5rem 1rem;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text-dark);
+        }
+
+        .project-image {
+            width: 100%;
+            margin-bottom: 3rem;
+            border: 1px solid var(--border);
+        }
+
+        .project-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .content-section {
+            margin-bottom: 3rem;
+        }
+
+        .content-section h2 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.75rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .content-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .content-section ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .content-section li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .content-section li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .highlight-box {
+            background: var(--bg-light);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 2rem;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="portfolio_with_typewriter.html" class="back-link">← Back to Portfolio</a>
+            <div style="color: var(--primary); font-weight: 600;">RIYA POKHREL</div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="project-header">
+            <!-- <div class="project-category">Professional Project</div> -->
+            <h1>SDG 15 Datasets and Indicators</h1>
+            <p class="project-meta">Thematic datasets and indicators for monitoring SDG 15: Life on Land for Bangladesh, Bhutan and Nepal. The datasets and indicators can be accessed through data visualization platform.</p>
+            <div class="project-links">
+                <a href="http://nepal.spatialapps.net/sdg15/nepal" class="project-link" target="_blank">View Project →</a>
+                      
+            </div>
+
+            
+            <div class="project-tags">
+                <span class="tag">SDG 15 datasets</span>
+                <span class="tag">SDG 15 indicators</span>
+                <span class="tag">Data Visualization</span>
+                <span class="tag">Land degradation</span>
+            </div>
+        </div>
+
+        <div class="project-image">
+            <img src="sdg15.png" alt="SDG 15 Platform">
+        </div>
+
+        <div class="content-section">
+            <h2>Overview</h2>
+            <p>Write your project overview here. Explain what the project is about, its purpose, and main objectives.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Problem Statement</h2>
+            <p>Describe the problem this project addresses...</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Methodology</h2>
+            <ul>
+                <li>Data collection and preprocessing techniques used</li>
+                <li>Analysis methods and tools</li>
+                <li>Technology stack (GIS tools, programming languages, etc.)</li>
+                <li>Implementation approach</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3 style="margin-bottom: 0.5rem; color: var(--primary);">Key Achievement</h3>
+            <p style="margin: 0;">Highlight your main accomplishment or impact from this project.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Results & Impact</h2>
+            <p>Describe the outcomes, findings, and real-world impact...</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Tools & Technologies</h2>
+            <ul>
+                <li>ArcGIS Pro / QGIS</li>
+                <li>Python (libraries used)</li>
+                <li>Google Earth Engine</li>
+                <li>PostgreSQL/PostGIS</li>
+            </ul>
+        </div>
+
+        <a href="http://nepal.spatialapps.net/sdg15/nepal" target="_blank" class="cta-button">View Live Project →</a>
+    </div>
+</body>
+</html>

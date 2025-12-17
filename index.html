@@ -153,6 +153,19 @@
             opacity: 0;
             animation: fadeUp 0.8s ease-out 0.3s forwards;
         }
+        .btn-accent {
+            background: var(--accent);
+            color: var(--text-dark);
+            border: 2px solid var(--accent);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-accent:hover {
+            background: transparent;
+            color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
 
         .typewriter {
             display: inline-block;
@@ -295,9 +308,8 @@
             transform: translateY(-2px);
         }
 
-        /* Hero Image */
-        .hero-image-wrapper {
-            position: relative;
+        /* .hero image-wrapper {
+            position: fixed;
             opacity: 0;
             animation: fadeIn 1s ease-out 0.5s forwards;
             display: flex;
@@ -334,11 +346,58 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
+            object-position: 45% center;
             display: block;
             filter: grayscale(10%);
             box-shadow: var(--shadow-xl);
+        }  */
+        
+        /* Hero Image */
+        .hero-image-wrapper {
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.5s forwards;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .image-frame {
+            position: relative;
+            width: 420px;
+            height: 420px;
+        }
+
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            z-index: -1;
+            box-shadow: 0 0 0 10px rgba(212, 175, 55, 0.1);
+        }
+
+        .hero-image {
+            width: 110%;
+            height: 110%;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: 30% center;
+            display: block;
+            filter: grayscale(10%);
+            position: relative;
+            top: -10%;
+            box-shadow: var(--shadow-xl);
+        }
         /* Common Section Styles */
         section {
             padding: 7rem var(--spacing-xl);
@@ -387,6 +446,7 @@
             line-height: 1.85;
             color: var(--text-light);
             margin-bottom: var(--spacing-lg);
+            text-align: justify;
         }
 
         .skills-container {
@@ -1116,6 +1176,7 @@
             <div class="hero-degree">
                 <span class="typewriter" id="typewriter-text"></span>
             </div>
+        
             <!-- <p class="hero-description">I am passionate about leveraging geospatial technologies to build innovative solutions to support environmental challenges.</p> -->
             
             <div class="consortium-logos">
@@ -1142,6 +1203,7 @@
 
             <div class="cta-buttons">
                 <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="RiyaPokhrel_CV.pdf" class="btn btn-secondary" download>Download CV</a>
                 <a href="#contact" class="btn btn-secondary">Get in Touch</a>
             </div>
         </div>
@@ -1162,9 +1224,10 @@
             </div>
             <div class="about-grid">
                 <div class="about-text reveal">
-                    <p>I'm a geospatial professional dedicated to leveraging cutting-edge technology for environmental sustainability. My work spans land degradation monitoring, climate analysis, and spatial data infrastructure development across South Asia's most critical mountain ecosystems.</p>
-                    <p>At ICIMOD, I've led initiatives monitoring SDG 15 indicators, conducted climate trend analysis across the Hindu Kush Himalaya, and built capacity for government agencies in Nepal, Bhutan, and Bangladesh. My expertise combines technical proficiency in GIS, remote sensing, and InSAR with strategic thinking about sustainable development.</p>
-                    <p>Currently pursuing my Master's in Digital Earth through the prestigious Copernicus program, I'm expanding my capabilities in machine learning, big earth data analytics, and advanced geospatial methodologies.</p>
+                    
+                    <p>I'm Riya Pokhrel, a Geomatics Engineer passionate about leveraging Earth observation to address environmental challenges. Over the past two years at ICIMOD, I've specialized in monitoring SDG 15: Life on Land across Nepal, Bhutan, and Bangladesh, and analyzing climate and vegetation trends across the Hindu Kush Himalaya region. My undergraduate thesis explored GNSS and InSAR processing for atmospheric water vapor estimation.</p>
+    
+                    <p>Currently, I'm pursuing my Master's in Digital Earth through the Copernicus programme (Erasmus Mundus), spending my first year at <b>Paris-Lodron University of Salzburg </b>diving deep into Geoinformatics and Earth observation, followed by a second year at <b>University of South Brittany </b>in France focusing on AI for Earth observation, big earth data analytics, and computer vision. I'm driven by the challenge of transforming complex geospatial data into actionable insights—working toward a career at the intersection of geospatial science, data engineering, and environmental sustainability.</p>
                 </div>
                 <div class="skills-container reveal">
                     <div class="skill-group">
@@ -1192,6 +1255,7 @@
                     <div class="skill-group">
                         <h3>Domain Knowledge</h3>
                         <div class="skills-list">
+                            <span class="skill-tag">SDG 15</span>
                             <span class="skill-tag">Land Degradation</span>
                             <span class="skill-tag">Climate Analysis</span>
                             <span class="skill-tag">Vegetation Monitoring</span>
@@ -1324,7 +1388,7 @@
                         <div class="card-date">JAN 2024 - OCT 2025</div>
                     </div>
                     <ul>
-                        <li>Led land degradation monitoring initiatives across Nepal, Bhutan and Bangladesh</li>
+                        <li>Assessed land degradation across Nepal, Bhutan and Bangladesh</li>
                         <li>Conducted climate trend analysis and anomaly detection for HKH region</li>
                         <li>Performed vegetation health assessment using remote sensing indices</li>
                         <li>Executed land suitability analysis for high-value indigenous crops</li>
@@ -1435,11 +1499,11 @@
                     </div>
                     <div class="project-content">
                         <h3>Climate Trend Analysis: HKH Region</h3>
-                        <p>Comprehensive climate trend analysis across the Hindu Kush Himalaya ecosystem.</p>
+                        <p>Climate trend analysis across the Hindu Kush Himalaya region.</p>
                         <div class="project-tags">
                             <span class="project-tag category">Professional</span>
                             <span class="project-tag">Climate Science</span>
-                            <span class="project-tag">Time Series</span>
+                            <span class="project-tag">Climate Trends</span>
                         </div>
                         <div class="project-links">
                             <a href="#" class="project-link">View →</a>
@@ -1457,7 +1521,7 @@
                         <div class="project-tags">
                             <span class="project-tag category">Professional</span>
                             <span class="project-tag">NDVI</span>
-                            <span class="project-tag">Monitoring</span>
+                            <span class="project-tag">Trends</span>
                         </div>
                         <div class="project-links">
                             <a href="#" class="project-link">View →</a>
@@ -1506,8 +1570,8 @@
                         <img src="regional.png" alt="Regional">
                     </div>
                     <div class="project-content">
-                        <h3>Regional SDG 15 Training: South Asia</h3>
-                        <p>Multi-country training for Bangladesh, Bhutan and Nepal agencies.</p>
+                        <h3>Regional SDG 15 Training: Nepal, Bhutan and Bangladesh</h3>
+                        <p>Capacity building training for Bangladesh, Bhutan and Nepal government agencies.</p>
                         <div class="project-tags">
                             <span class="project-tag category">Professional</span>
                             <span class="project-tag">Regional</span>
@@ -1618,8 +1682,8 @@
         <div class="section-wrapper">
             <div class="section-header reveal">
                 <div class="section-label">Academic Portfolio</div>
-                <h2 class="section-title">CDE Program Journey</h2>
-                <p class="cde-intro">Throughout the Copernicus Master in Digital Earth program, I'm engaging in cutting-edge research and developing advanced geospatial data science capabilities.</p>
+                <h2 class="section-title">CDE Program</h2>
+                <!-- <p class="cde-intro">Throughout the Copernicus Master in Digital Earth program, I'm engaging in cutting-edge research and developing advanced geospatial data science capabilities.</p> -->
             </div>
 
             <div class="semester-tabs">
@@ -1635,9 +1699,9 @@
                         <img src="app.png" alt="Urban">
                     </div>
                     <h4>Urban Expansion Analysis: Kathmandu Valley</h4>
-                    <span class="cde-badge">GEE Application</span>
-                    <p>Interactive GEE application visualizing urban expansion in Kathmandu Valley (2000-2024) using Landsat time series.</p>
-                    <a href="#" class="cde-link">View Project →</a>
+                    <span class="cde-badge">Big Earth Data Coursework</span>
+                    <p>Interactive GEE application visualizing urban expansion in Kathmandu Valley betweemn2000 and 2024 using Landsat imageries.</p>
+                    <a href="https://code.earthengine.google.com/1874dd592de9407cac1cd9992bac22bb" class="cde-link" target = "_blank">View Project →</a>
                 </div>
 
                 <div class="cde-card reveal">
@@ -1645,16 +1709,30 @@
                         <img src="sdi.png" alt="SDI">
                     </div>
                     <h4>A-RDSM: Rural Depopulation SDI</h4>
-                    <span class="cde-badge">Team Project</span>
+                    <span class="cde-badge">SDI Project</span>
                     <p>Comprehensive SDI monitoring rural depopulation across Austria using PostgreSQL/PostGIS and OGC services.</p>
                     <a href="#" class="cde-link">View Project →</a>
                 </div>
 
                 <div class="cde-card reveal">
-                    <h4>Advanced Remote Sensing Projects</h4>
-                    <span class="cde-badge">Coursework</span>
-                    <p>Multi-scale segmentation, OBIA, and systems theory applications in real-world contexts.</p>
-                    <a href="#" class="cde-link">Explore →</a>
+                    <div class="cde-image">
+                        <img src="insar.png" alt="SDI">
+                    </div>
+                    <h4>Differential InSAR</h4>
+                    <span class="cde-badge">Advanced Remote Sensing Coursework</span>
+                    <p>Assessing ground deformation through DInSAR</p>
+                    <a href="#" class="cde-link">Details →</a>
+                </div>
+
+                <div class="cde-card reveal">
+                    <div class="cde-image">
+                        <img src="network.png" alt="SDI">
+                    </div>
+                    <h4>Network Analysis</h4>
+                    <span class="cde-badge">Methods in Spatial Analysis</span>
+                    <!-- <p>Assessing ground deformation through DInSAR</p> -->
+                    <p></p>
+                    <a href="#" class="cde-link">Details →</a>
                 </div>
             </div>
 
@@ -1699,13 +1777,13 @@
                 <div class="contact-item reveal">
                     <div class="contact-label">Email</div>
                     <div class="contact-value">
-                        <a href="mailto:your.email@example.com">your.email@example.com</a>
+                        <a href="mailto:riyapokhrel07@gmail.com">riyapokhrel07@gmail.com</a>
                     </div>
                 </div>
                 <div class="contact-item reveal">
                     <div class="contact-label">Phone</div>
                     <div class="contact-value">
-                        <a href="tel:+1234567890">+1 (234) 567-890</a>
+                        <a href="tel: +43 0677 63130447">+43 0677 63130447</a>
                     </div>
                 </div>
                 <div class="contact-item reveal">
@@ -1722,10 +1800,10 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer
     <footer>
         <p>© 2024 Riya Pokhrel · Geospatial Data Scientist</p>
-    </footer>
+    </footer> -->
 
     <script>
         // Smooth scroll

@@ -1150,6 +1150,204 @@
                 font-size: 1rem;
             }
         }
+        /* Blog Modal */
+        .blog-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 20, 40, 0.75);
+            z-index: 2000;
+            backdrop-filter: blur(4px);
+            overflow-y: auto;
+            padding: 2rem 1rem;
+        }
+
+        .blog-modal-overlay.open {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .blog-modal {
+            background: var(--bg-white);
+            max-width: 780px;
+            width: 100%;
+            position: relative;
+            box-shadow: var(--shadow-xl);
+            animation: modalSlideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: auto;
+        }
+
+        @keyframes modalSlideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .blog-modal-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 2.2rem;
+            height: 2.2rem;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition-base);
+            z-index: 10;
+            line-height: 1;
+        }
+
+        .blog-modal-close:hover { background: var(--accent); color: var(--text-dark); }
+
+        .blog-modal-inner {
+            padding: 3rem 3rem 2.5rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .blog-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 0.3rem 0.8rem;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            color: var(--secondary);
+        }
+
+        .blog-title {
+            font-family: 'Fraunces', serif;
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.15;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .blog-day-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 2.2rem 0 1rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .blog-body {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: var(--text-light);
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        .blog-closing {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: var(--text-dark);
+            font-style: italic;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-left: 3px solid var(--accent);
+        }
+
+        /* Photo Gallery */
+        .blog-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin: 1.8rem 0;
+        }
+
+        .blog-gallery .gallery-wide {
+            grid-column: span 2;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform var(--transition-slow);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26,54,93,0.75);
+            color: white;
+            font-size: 0.72rem;
+            padding: 0.4rem 0.6rem;
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+
+        /* Placeholder state when image missing */
+        .gallery-item.gallery-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--bg-light),
+                var(--bg-light) 8px,
+                var(--border) 8px,
+                var(--border) 10px
+            );
+        }
+
+        .gallery-item.gallery-placeholder img { display: none; }
+
+        .gallery-item.gallery-placeholder .gallery-caption {
+            position: static;
+            background: none;
+            color: var(--text-light);
+            font-size: 0.78rem;
+            text-align: center;
+            padding: 0.5rem;
+            opacity: 1;
+        }
+
     </style>
 </head>
 <body>
@@ -1688,7 +1886,7 @@
 
             <div class="semester-tabs">
                 <button class="semester-tab active" data-sem="1">Semester I</button>
-                <button class="semester-tab disabled" data-sem="2">Semester II</button>
+                <button class="semester-tab" data-sem="2">Semester II</button>
                 <button class="semester-tab disabled" data-sem="3">Semester III</button>
                 <button class="semester-tab disabled" data-sem="4">Semester IV</button>
             </div>
@@ -1737,6 +1935,16 @@
             </div>
 
             <div class="semester-content" id="semester-2">
+                <div class="cde-card reveal" style="cursor:pointer;" onclick="window.open('ai4eo-blog.html','_blank')">
+                    <div class="cde-image">
+                        <img src="ai4eo_cover.jpg" alt="AI4EO Spring School Vannes" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a365d 0%,#2d5985 100%)'; this.style.display='none'; this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:white;font-family:Fraunces,serif;font-size:1.1rem;letter-spacing:1px;\'>AI4EO · Vannes 2026</div>';">
+                    </div>
+                    <h4>AI4EO Spring School 2026</h4>
+                    <span class="cde-badge">Spring School · Vannes</span>
+                    <p>Three days of foundation models, responsible AI, MLOps, and generative EO — hosted by Université Bretagne Sud in collaboration with ESA's Phi-Lab.</p>
+                    <span class="cde-link">Read Blog →</span>
+                </div>
+
                 <div class="cde-card reveal">
                     <h4>Machine Learning for Earth Observation</h4>
                     <span class="cde-badge">Research</span>
@@ -1799,9 +2007,97 @@
         </div>
     </section>
 
+    <!-- AI4EO Blog Modal -->
+    <div id="blogModal" class="blog-modal-overlay" onclick="closeBlogModal(event)">
+        <div class="blog-modal">
+            <button class="blog-modal-close" onclick="closeBlogModal()">&times;</button>
+
+            <div class="blog-modal-inner">
+                <div class="blog-meta">
+                    <span class="blog-tag">Spring School</span>
+                    <span class="blog-tag">AI for Earth Observation</span>
+                    <span class="blog-tag">Vannes, France</span>
+                </div>
+
+                <h1 class="blog-title">AI4EO Spring School 2026</h1>
+                <p class="blog-subtitle">April 8–10 · Université Bretagne Sud · Vannes, France</p>
+
+                <p class="blog-body">From April 8–10, I had the opportunity to attend the AI4EO Spring School in Vannes, France — a three-day event hosted by Université Bretagne Sud and organized by the OBELIX research group in collaboration with ESA's Phi-Lab, the Copernicus Master in Digital Earth program, and the SequoIA AI cluster. The spring school brought together graduate students, researchers, and Earth Observation enthusiasts from across Europe for a packed programme of lectures, hands-on sessions, and a closing data challenge.</p>
+
+                <!-- Photo gallery row 1 -->
+                <div class="blog-gallery">
+                    <div class="gallery-item">
+                        <img src="photo1.jpg" alt="Spring School Day 1" onerror="this.parentElement.classList.add('gallery-placeholder')">
+                        <span class="gallery-caption"></span>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="photo2.jpg" alt="Hands-on session" onerror="this.parentElement.classList.add('gallery-placeholder')">
+                        <span class="gallery-caption"></span>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="photo3.jpg" alt="Participants" onerror="this.parentElement.classList.add('gallery-placeholder')">
+                        <span class="gallery-caption"></span>
+                    </div>
+                </div>
+
+                <h2 class="blog-day-title">Day 1 — Foundation Models and the Limits of What I Know</h2>
+
+                <p class="blog-body">The spring school opened with a welcome address by Sébastien Lefèvre before diving straight into the science. The first lecture, delivered by Iris de Gélis, explored deep learning methods for change detection in 3D point clouds — a niche but compelling intersection of computer vision and geospatial analysis. This was followed by a talk from Stéphane May, research engineer at CNES (the French space agency), on foundation models and their emerging applications in Earth Observation.</p>
+
+                <p class="blog-body">To put theory into practice, Pierre Adorni, a PhD candidate at IRISA, Université Bretagne Sud, led a hands-on session in which we adapted a pre-trained encoder for land cover classification using a small labelled subset — an exercise that made the concept of transfer learning refreshingly concrete. Woven into the day's programme, ESA's Phi-Lab also hosted a live webinar to introduce an exciting new challenge.</p>
+
+                <p class="blog-body">As someone with no prior background in deep learning or foundation models, keeping up was genuinely difficult. More than anything, Day 1 felt like a preview of what my second year at Vannes has in store: foundation models, weights and biases, fine-tuning, and more mathematical equations than I can currently imagine. Daunting? Absolutely. But I left the day feeling more curious than overwhelmed — and genuinely excited to eventually use these tools to contribute something meaningful through Earth Observation.</p>
+
+                <h2 class="blog-day-title">Day 2 — Responsible AI, MLOps, and a Sunset on the Gulf</h2>
+
+                <p class="blog-body">The morning opened with a lecture on Responsible AI in Earth Observation by Pedram Ghamisi, Professor and Head of the Responsible AI Group at Helmholtz-Zentrum Dresden-Rossendorf (HZDR) and Lancaster University. The session introduced the concept of fairness auditing across geographic regions — specifically, testing whether a model trained on European imagery degrades when applied to data from the Global South, and why this failure mode is so rarely discussed. The lecture also addressed temporal bias, annotation inconsistency, and sensor drift as sources of compounding error in change detection tasks.</p>
+
+                <p class="blog-body">What stood out most was the discussion on the environmental sustainability of AI. The message was clear: before training a new model for every new application, we should ask whether an existing one can be fine-tuned instead. It's a deceptively simple idea, but one with real implications for how responsibly we use these increasingly resource-intensive tools. This was followed by a hands-on session led by Weikang Yu, in which we ran a regional disaggregation audit on a pre-trained segmentation model and documented the performance gaps across different geographies.</p>
+
+                <p class="blog-body">The afternoon shifted to MLOps with TorchGeo, delivered by Adam J. Stewart — the creator and lead developer of the TorchGeo library and a postdoctoral researcher at the Technical University of Munich. His lecture focused on building efficient, reproducible AI workflows: managing data versions, code, software environments, and experiments with the same rigour applied to model architecture itself. Reproducibility, he argued, is less glamorous than designing a new neural network, but arguably just as important. A workflow that can't be replicated — by someone else, or by your future self — is a workflow that can't be built upon.</p>
+
+                <!-- Photo gallery row 2 -->
+                <div class="blog-gallery">
+                    <div class="gallery-item gallery-wide">
+                        <img src="photo4.jpg" alt="Gulf of Morbihan cruise" onerror="this.parentElement.classList.add('gallery-placeholder')">
+                        <span class="gallery-caption">Replace with your photo — rename to photo4.jpg</span>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="photo5.jpg" alt="Gulf of Morbihan sunset" onerror="this.parentElement.classList.add('gallery-placeholder')">
+                        <span class="gallery-caption">Replace with your photo — rename to photo5.jpg</span>
+                    </div>
+                </div>
+
+                <p class="blog-body">In the evening, all participants were taken on a cruise around the Gulf of Morbihan. Having never seen the ocean up close before (flights don't count), it was a genuinely memorable experience — all wind, golden light, and a sunset I didn't want to end.</p>
+
+                <h2 class="blog-day-title">Day 3 — Generative Models and a Real Challenge</h2>
+
+                <p class="blog-body">The final day opened with a lecture on generative models by Nicolas Audebert, a research scientist at IGN's LASTIG lab. He showed us how generative models — the same family of techniques behind AI image generators — are being applied to satellite data. The applications range from the immediately practical, such as generating synthetic training data to fill gaps in labelled datasets, to the genuinely visionary: simulating how a landscape might look after a flood, or under different climate scenarios.</p>
+
+                <p class="blog-body">One of the most thought-provoking points came from his discussion of cross-modal translation — specifically, how models trained on optical imagery cannot be directly applied to SAR data. The translation required between the two modalities is not just a technical workaround; it's an opportunity. If we can reliably translate between optical and SAR representations, we could apply existing optical models to SAR data without retraining from scratch — another meaningful contribution to the sustainability of AI in EO.</p>
+
+                <p class="blog-body">The spring school concluded with an open data challenge hosted by ESA's Phi-Lab, where participants tackled a real problem: deriving height information from image embeddings. It was the moment where everything from the past three days — foundation models, responsible practices, reproducibility, generative techniques — came together in a single applied task. We were also encouraged by the organisers to continue developing our projects beyond the spring school itself, which I intend to do.</p>
+
+                <!-- Photo gallery row 3 -->
+                <div class="blog-gallery">
+                    <div class="gallery-item">
+                        <img src="photo6.jpg" alt="Data challenge" onerror="this.parentElement.classList.add('gallery-placeholder')">
+                        <span class="gallery-caption">Replace with your photo — rename to photo6.jpg</span>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="photo7.jpg" alt="Spring school group" onerror="this.parentElement.classList.add('gallery-placeholder')">
+                        <span class="gallery-caption">Replace with your photo — rename to photo7.jpg</span>
+                    </div>
+                </div>
+
+                <p class="blog-closing">The AI4EO Spring School was equal parts humbling and energising. Three days was barely enough to scratch the surface, but it was more than enough to make clear how much there is to learn — and how worthwhile that learning will be.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
-        <p>© 2025 Riya Pokhrel · Geomatics Engineer</p>
+        <p>© 2026 Riya Pokhrel · Geomatics Engineer</p>
     </footer>
 
     <script>
@@ -1846,8 +2142,29 @@
                     
                     semTabs.forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
+
+                    document.querySelectorAll('.semester-content').forEach(c => c.classList.remove('active'));
+                    const target = document.getElementById('semester-' + sem);
+                    if (target) target.classList.add('active');
                 }
             });
+        });
+
+        // Blog modal
+        function openBlogModal() {
+            document.getElementById('blogModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBlogModal(e) {
+            if (!e || e.target === document.getElementById('blogModal') || e.currentTarget.classList.contains('blog-modal-close')) {
+                document.getElementById('blogModal').classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeBlogModal();
         });
 
         // Scroll reveal

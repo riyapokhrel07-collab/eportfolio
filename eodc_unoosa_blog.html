@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EODC & UNOOSA, Vienna | Riya Pokhrel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2d5985;
+            --accent: #d4af37;
+            --text-dark: #1a202c;
+            --text-light: #4a5568;
+            --bg-light: #f7fafc;
+            --bg-white: #ffffff;
+            --border: #e2e8f0;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.08);
+            --shadow-xl: 0 16px 48px rgba(0,0,0,0.12);
+            --transition-base: 0.3s ease;
+            --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text-dark);
+            background: var(--bg-white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Top bar ── */
+        .topbar {
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .topbar-back {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color var(--transition-base);
+        }
+
+        .topbar-back:hover { color: var(--primary); }
+
+        .topbar-back svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        .topbar-logo {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+        }
+
+        /* ── Hero banner ── */
+        .blog-hero {
+            width: 100%;
+            height: 420px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 60%, #3a6fa8 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .blog-hero img.hero-cover {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            display: block;
+        }
+
+        .blog-hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 2.5rem 3rem;
+            max-width: 860px;
+        }
+
+        .blog-hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 0.3rem 0.85rem;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.9);
+            backdrop-filter: blur(4px);
+        }
+
+        .blog-hero h1 {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 600;
+            color: #ffffff;
+            line-height: 1.15;
+            margin-bottom: 0.6rem;
+        }
+
+        .blog-hero-meta {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            font-weight: 500;
+        }
+
+        /* ── Main content ── */
+        .blog-main {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 3.5rem 2rem 5rem;
+        }
+
+        .blog-intro {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        /* Section headings */
+        .day-section {
+            margin-top: 3rem;
+        }
+
+        .day-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .day-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.25;
+            margin-bottom: 1.5rem;
+            padding-left: 1.1rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .blog-p {
+            font-size: 1.02rem;
+            line-height: 1.9;
+            color: var(--text-light);
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        /* ── Photo gallery ── */
+        .gallery {
+            margin: 2rem 0;
+            display: grid;
+            gap: 0.6rem;
+        }
+
+        .gallery-3 { grid-template-columns: repeat(3, 1fr); }
+        .gallery-2 { grid-template-columns: 2fr 1fr; }
+        .gallery-2-sym { grid-template-columns: 1fr 1fr; }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            aspect-ratio: 4/3;
+            cursor: zoom-in;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform var(--transition-slow);
+        }
+
+        .gallery-item:hover img { transform: scale(1.04); }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(26,54,93,0.8);
+            color: white;
+            font-size: 0.72rem;
+            padding: 0.4rem 0.7rem;
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .gallery-item:hover .gallery-caption { opacity: 1; }
+
+        /* placeholder when image is missing */
+        .gallery-item.ph {
+            cursor: default;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--bg-light),
+                var(--bg-light) 10px,
+                var(--border) 10px,
+                var(--border) 12px
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-item.ph img { display: none; }
+
+        .gallery-item.ph .gallery-caption {
+            position: static;
+            background: none;
+            color: var(--text-light);
+            font-size: 0.78rem;
+            text-align: center;
+            opacity: 1;
+            padding: 0.6rem 1rem;
+        }
+
+        /* ── Closing quote ── */
+        .blog-closing {
+            margin-top: 3rem;
+            padding: 1.8rem 2rem;
+            background: var(--bg-light);
+            border-left: 4px solid var(--accent);
+            font-size: 1.08rem;
+            font-style: italic;
+            line-height: 1.85;
+            color: var(--text-dark);
+        }
+
+        /* ── Lightbox ── */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            cursor: zoom-out;
+        }
+
+        .lightbox.open { display: flex; }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 88vh;
+            object-fit: contain;
+            box-shadow: var(--shadow-xl);
+            animation: lbIn 0.25s ease;
+        }
+
+        @keyframes lbIn {
+            from { opacity:0; transform: scale(0.95); }
+            to   { opacity:1; transform: scale(1); }
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 1.2rem;
+            right: 1.5rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+            background: none;
+            border: none;
+            opacity: 0.8;
+            transition: opacity var(--transition-base);
+        }
+
+        .lightbox-close:hover { opacity: 1; }
+
+        /* ── Footer ── */
+        .blog-footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            border-top: 1px solid var(--border);
+        }
+
+        .blog-footer a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .blog-footer a:hover { color: var(--primary); }
+
+        /* Reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+<body>
+
+<!-- Top bar -->
+<nav class="topbar">
+    <a class="topbar-back" href="index.html">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to Portfolio
+    </a>
+    <span class="topbar-logo">Riya Pokhrel</span>
+</nav>
+
+<!-- Hero banner -->
+<div class="blog-hero">
+    <!-- Replace eodc_unoosa_cover.jpg with your own cover photo -->
+    <img class="hero-cover" src="photo6.jpg" alt="EODC and UNOOSA, Vienna" onerror="this.style.display='none'">
+    <div class="blog-hero-content">
+        <div class="blog-hero-tags">
+            <span class="blog-tag">Copernicus Hubs &amp; Institutions</span>
+            <span class="blog-tag">Earth Observation</span>
+            <span class="blog-tag">Vienna, Austria</span>
+        </div>
+        <h1>A Day Among Satellites and Supercomputers</h1>
+        <p class="blog-hero-meta">May 26, 2025 · EODC &amp; UNOOSA · Vienna, Austria</p>
+    </div>
+</div>
+
+<!-- Main content -->
+<main class="blog-main">
+
+    <p class="blog-intro reveal">
+        On May 26, 2025, as part of the Copernicus Hubs and Institution Course in the Copernicus Master in Digital Earth program at the University of Salzburg, our cohort spent a day visiting two very different but quietly connected institutions in Vienna: the Earth Observation Data Centre (EODC) and the United Nations Office for Outer Space Affairs (UNOOSA). One showed me the machinery that makes Earth observation possible; the other showed me why that machinery matters far beyond any one country's borders.
+    </p>
+
+    <!-- Section 1: EODC -->
+    <div class="day-section reveal">
+        <div class="day-label">Stop 1 · EODC</div>
+        <h2 class="day-title">Earth Observation Data Centre (EODC)</h2>
+
+        <p class="blog-p">EODC was our first stop, and the day opened with a session from Jan Zabloudil on Austrian Scientific Computing Infrastructure (ASC). ASC is a cooperation of several Austrian universities that provides computing resources and technical support to the Austrian research community. He walked us through how ASC, formerly known as the Vienna Scientific Cluster (VSC), has evolved over the years in response to growing computing needs. Its current flagship systems, VSC-4, VSC-5, and MUSICA, are the fastest supercomputers in Austria.</p>
+
+        <p class="blog-p">MUSICA, the newest addition, runs across 440 compute nodes (272 GPU and 168 CPU) spread over three sites, with the larger share based in Vienna and the rest split between Linz and Innsbruck. It's built with a strong mix of GPU and CPU nodes alongside high-speed, all-flash storage — exactly what makes it well suited to AI computing demands, since the compute and the storage are both designed to keep pace with that kind of workload. Because the system is deliberately distributed across Vienna, Linz, and Innsbruck rather than centered in the capital, the renaming makes sense too: ASC was chosen over VSC specifically to reflect that it's no longer just a Vienna cluster but a national, distributed one.</p>
+
+        <p class="blog-p">After the lecture, Jan showed us around the server rooms of VSC-4 and VSC-5. It was my first time walking into a data centre room, so it was a rather thrilling experience. The racks were organized in long rows, and there were many of them. What stood out to me was how the design of these systems can impact the energy lost to the surrounding air. While we walked across the aisle of one system, it was venting noticeably hot air, while a system that looked similar from the outside was releasing significantly less heat into the room. It was a reminder of how a design choice — something as specific as the cooling architecture — can make a real difference in protecting against energy leakage. In one of the rooms, Jan showed us how they've moved to liquid cooling to manage heat instead of relying purely on air conditioning; MUSICA, in particular, cools its compute nodes directly with liquid, while heat from supporting components like power supplies and network switches is handled separately through heat exchangers built into the racks. It was a sustainable choice which I really admired.</p>
+
+        <!-- Gallery — VSC-5 room -->
+        <div class="gallery" style="grid-template-columns: 1fr;">
+            <div class="gallery-item" style="aspect-ratio: 16/9;" onclick="openLightbox(this)">
+                <img src="photo6.jpg" alt="VSC-5 room" onerror="this.closest('.gallery-item').classList.add('ph')">
+                <span class="gallery-caption">Vienna Scientific Cluster 5 (VSC-5) room</span>
+            </div>
+        </div>
+
+        <p class="blog-p">Soon after, Christian from EODC gave us an overview of the organization itself. He spoke about EODC's mission, available facilities, and the services it offers. EODC was established as a public-private partnership, with the aim of fostering collaboration between the public and private sectors as well as international partners, particularly through the establishment and operation of shared IT infrastructure. EODC serves as a bridge between scientific research and practical applications, promoting the use of Earth Observation (EO) data across various domains. It is also involved in several Copernicus initiatives, including the Copernicus Global Land Service (C-GLOPS), the Copernicus Climate Change Service (C3S), and the Global Flood Monitoring Service (GFM), among others.</p>
+    </div>
+
+    <!-- Section 2: UNOOSA -->
+    <div class="day-section reveal">
+        <div class="day-label">Stop 2 · UNOOSA</div>
+        <h2 class="day-title">United Nations Office for Outer Space Affairs (UNOOSA)</h2>
+
+        <p class="blog-p">UNOOSA was our second and final stop of the day, located inside the UN office in Vienna. UNOOSA works to promote international cooperation in the peaceful use and exploration of space, and in the utilization of space science and technology for sustainable economic and social development. Under its Space Applications Section, several flagship programmes and global initiatives stood out: UN-SPIDER, Space4Water, Space4SDGs, Access to Space for All, Space4Women, and Space4Youth.</p>
+
+        <p class="blog-p">We had the opportunity to learn about several projects the organization supports, of which rapid land subsidence analysis was particularly interesting to me. It was also fascinating to learn how UNOOSA supports the launch of nano-satellites for developing nations for EO applications, a reminder that space infrastructure doesn't have to mean billion-dollar missions to be transformative.</p>
+
+        <p class="blog-p">Beyond the presentation, the interaction session was genuinely engaging. There were thoughtful discussions around UNOOSA's future work, its priority areas, its synergy with other UN bodies, and its cooperation with member countries and other international organizations. We also talked about sustainability concerns and the environmental impact of the massive increase in satellite launches in recent years. The need for open datasets, optimal utilization of existing datasets, and broader accessibility of data was highlighted repeatedly throughout the discussion.</p>
+
+        <p class="blog-p">What stayed with me from the visit is this: even though individual resources can be limited, cooperation with organizations like UNOOSA brings space closer to everyone than we might think, something especially valuable for countries and institutions that can't build large-scale space infrastructure on their own.</p>
+
+        <!-- Gallery — space exhibition -->
+        <div class="gallery" style="grid-template-columns: 1fr;">
+            <div class="gallery-item" style="aspect-ratio: 16/9;" onclick="openLightbox(this)">
+                <img src="photo8.jpg" alt="Space Exhibition, UNOOSA" onerror="this.closest('.gallery-item').classList.add('ph')">
+                <span class="gallery-caption">Space Exhibition, UNOOSA, Vienna</span>
+            </div>
+        </div>
+
+        <p class="blog-p">We also visited the public space exhibition at the UN office. On display were moon rocks, models of the International Space Station, rockets, satellites, and more. It was a genuinely beautiful thing to see in person, a tangible reminder of how much has been built, and how much of it stands on shared effort.</p>
+    </div>
+
+    <p class="blog-closing reveal">
+        Looking back, the day had a quiet symmetry to it. EODC showed the infrastructure layer: the racks, the liquid cooling, the distributed supercomputing that makes processing petabytes of Sentinel data possible at all. UNOOSA showed the cooperation layer: the policy frameworks, partnerships, and shared access that decide who actually gets to use that infrastructure once it exists. Neither one means much without the other — raw computing power without open access just concentrates capability, and open-access ambitions without the underlying infrastructure stay aspirational. For someone from Nepal, thinking about how EO data and space technology can serve places with far fewer resources, seeing both halves of that equation in a single day was the most valuable part of the visit.
+    </p>
+
+</main>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+</div>
+
+<footer class="blog-footer">
+    <p>© 2026 Riya Pokhrel · <a href="index.html">Back to Portfolio</a></p>
+</footer>
+
+<script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Lightbox
+    function openLightbox(item) {
+        const img = item.querySelector('img');
+        if (!img || item.classList.contains('ph')) return;
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
